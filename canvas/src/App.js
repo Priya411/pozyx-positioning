@@ -6,7 +6,8 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            coordinates: {}
+            coordinates: {},
+            accelereation: 0
         }
     }
 
@@ -47,10 +48,11 @@ class App extends Component {
                 const normlizedAcceleration = this.normalize(update[0].data.tagData.accelerometer[0][0],
                     update[0].data.tagData.accelerometer[0][1],
                     update[0].data.tagData.accelerometer[0][2]);
-
+                    
+                    this.setState({accelereation: normlizedAcceleration});
                 //Set the state of acceleration
 
-                console.log(normlizedAcceleration);
+              //  console.log(normlizedAcceleration);
 
             }
 
@@ -68,7 +70,7 @@ class App extends Component {
 
         return (
             <div className="App">
-                <CanvasDraw cord={this.state.coordinates}/>
+                <CanvasDraw cord={this.state.coordinates} acc={this.state.accelereation}/>
             </div>
         );
     }

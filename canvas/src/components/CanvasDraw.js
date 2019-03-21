@@ -51,30 +51,40 @@ class CanvasDraw extends Component {
         this.draw();
         window.requestAnimationFrame(this.drawLoop);
     }
+    
 
     draw(e) {
         const ctx = this.ctx();
         let hue = this.state.hue;
+        let newHue = (Y - 1000)/(6500 - 1000) * (360);
+        let X = Math.abs(this.props.cord.x);
+        let Y = Math.abs(this.props.cord.y);
+        let yCord = (Y - 1000)/(6500 - 1000) * (window.innerHeight);
+        let xCord = (X - 15500)/(5500 - 15500) * (window.innerWidth);
+        
+        consol.log();
 
-        if (this.state.isDrawing) {
+            this.setState({
+                hue: newHue,
+                lastX: xCord,
+                lastY: yCord
+            });
+            
+        if (this.state.isDrawing && this.props.acc > 2000) {
             if (this.state.color && this.state.customColor) {
                 ctx.strokeStyle = this.state.color;
             } else {
                 ctx.strokeStyle = `hsl(${this.state.hue}, 100%, 50%)`;
             }
+           
+                    
             ctx.beginPath();
             ctx.moveTo(this.state.lastX, this.state.lastY);
-            ctx.lineTo((this.props.cord.x) - 11200, (this.props.cord.y) + 9000);
+            ctx.lineTo(xCord, yCord);
             ctx.stroke();
-            hue++
             if (hue >= 360) {
                 hue = 1
             }
-            this.setState({
-                hue: hue,
-                lastX: (this.props.cord.x) - 11200,
-                lastY: (this.props.cord.y) + 9000
-            })
             if (!this.state.customStroke) {
                 this.handleWidth(e);
             }
@@ -92,9 +102,9 @@ class CanvasDraw extends Component {
             })
         }
         if (nextState) {
-            ctx.lineWidth++
+            ctx.lineWidth++;
         } else {
-            ctx.lineWidth--
+            ctx.lineWidth--;
         }
     }
 
@@ -141,8 +151,6 @@ class CanvasDraw extends Component {
     }
 
     render() {
-
-        //console.log(this.state.lastX);
 
 
         const canvasStyle = {
