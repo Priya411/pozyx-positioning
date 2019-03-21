@@ -5,6 +5,7 @@
   "dependencies": {
     "mqtt": "^2.18.8",
     "react": "^16.8.4",
+    "react-canvas-draw": "^1.0.0",
     "react-dom": "^16.8.4",
     "react-scripts": "2.1.8"
   },
