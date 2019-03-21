@@ -40,7 +40,15 @@ class CanvasDraw extends Component {
         ctx.lineJoin = "round";
         ctx.lineCap = "round";
         ctx.lineWidth = Number(this.state.minWidth) + 1;
+        this.drawLoop();
+       
     }
+    
+    drawLoop = () => {
+        this.draw();
+        window.requestAnimationFrame(this.drawLoop);
+    }
+    
     draw(e) {
         const ctx = this.ctx();
         let hue = this.state.hue;
@@ -129,14 +137,15 @@ class CanvasDraw extends Component {
     render() {
         
         console.log(this.state.lastX);
-
+        
+            
         const canvasStyle = {
             border: "1px solid black"
         }
 
         return (
                 <div>
-                    <canvas id="draw" width={this.props.width} height={this.props.height} onMouseMove={this.draw}
+                    <canvas id="draw" width={this.props.width} height={this.props.height}
                             style={canvasStyle}/>
                     <Controls left={this.state.controlLeft} display={this.state.controlDisplay} canvas={this.canvas}
                               ctx={this.ctx} color={this.state.color} customColor={this.state.customColor}
