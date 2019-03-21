@@ -1,6 +1,6 @@
 import React, {Component}
 from "react";
-class StickMan extends Component {
+class Jump extends Component {
 
     constructor(props) {
         super(props);
@@ -45,13 +45,13 @@ class StickMan extends Component {
 
     render() {
         let acc = this.props.acc;
-        let power = (acc - 2000) / (5000 - 2000) * (90);
+        let power = (acc - 2000) / (5000 - 2000) * (200);
         if (power < 0) {
             power = 0;
         }
 
         var style = {
-            transform: 'rotate(' + power + 'deg)'
+            transform: 'translate(0px, '+-power+'px)'
         };
 
         return (
@@ -59,11 +59,11 @@ class StickMan extends Component {
                     <button onClick={this.reset}>Reset</button>
                     <h1>{this.state.score}</h1>
                     <br/>
-                    <img src={require('../img/bag.jpg')} style={style}/>
+                    <img src={require('../img/stickman.png')} style={style}/>
                 </div>
                 );
     }
 
 }
 
-export default StickMan;
+export default Jump;

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import CanvasDraw from './components/CanvasDraw';
 import StickMan from './components/StickMan';
+import Jump from './components/Jump';
 import './App.css';
 
 class App extends Component {
@@ -71,7 +72,7 @@ class App extends Component {
 
         return (
             <div className="App">
-                <StickMan cord={this.state.coordinates} acc={this.state.accelereation}/>
+                <Jump cord={this.state.coordinates} acc={this.state.accelereation}/>
             </div>
         );
     }
