@@ -137,12 +137,6 @@ class CanvasDraw extends Component {
         return (
                 <div>
                     <canvas id="draw" width={this.props.width} height={this.props.height} onMouseMove={this.draw}
-                            onMouseDown={(e) => {
-                        this.setState({isDrawing: true,
-                            lastX: e.nativeEvent.offsetX,
-                            lastY: e.nativeEvent.offsetY})}} 
-                            onMouseUp={() => this.setState({isDrawing: false})} 
-                            onMouseOut={() => this.setState({isDrawing: false})} 
                             style={canvasStyle}/>
                     <Controls left={this.state.controlLeft} display={this.state.controlDisplay} canvas={this.canvas}
                               ctx={this.ctx} color={this.state.color} customColor={this.state.customColor}
