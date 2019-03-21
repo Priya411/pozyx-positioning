@@ -136,7 +136,7 @@ class CanvasDraw extends Component {
 
     render() {
         
-        console.log(this.state.lastX);
+        //console.log(this.state.lastX);
         
             
         const canvasStyle = {

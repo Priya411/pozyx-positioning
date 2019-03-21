@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import CanvasDraw from './components/CanvasDraw';
 import './App.css';
 
 class App extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             coordinates: {}
@@ -39,23 +39,38 @@ class App extends Component {
             const update = JSON.parse(message.toString());
 
             //console.info(message.toString());
-            if(update[0].success){
+            if (update[0].success) {
                 this.setState({coordinates: update[0].data.coordinates})
-              //  console.log(this.state.coordinates);
+                //  console.log(this.state.coordinates);
+                //console.log(update[0].data.tagData.accelerometer[0]);
+
+                const normlizedAcceleration = this.normalize(update[0].data.tagData.accelerometer[0][0],
+                    update[0].data.tagData.accelerometer[0][1],
+                    update[0].data.tagData.accelerometer[0][2]);
+
+                //Set the state of acceleration
+
+                console.log(normlizedAcceleration);
+
             }
+
+
             // To get a JavaScript object, use
         });
     }
 
-    render() {
-        
+    normalize = (x, y, z) => {
+        const length = Math.sqrt(x * x + y * y + z * z);
+        return Math.ceil(length);
+    };
 
-        
+    render() {
+
         return (
-                <div className="App">
-                    <CanvasDraw cord={this.state.coordinates}/>
-                </div>
-                );
+            <div className="App">
+                <CanvasDraw cord={this.state.coordinates}/>
+            </div>
+        );
     }
 }
 
