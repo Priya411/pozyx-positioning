@@ -14,7 +14,7 @@ class CanvasDraw extends Component {
             controlLeft: "100%",
             customColor: true,
             color: "#000000",
-            customStroke: false,
+            customStroke: true,
             maxWidth: 100,
             minWidth: 5
         };
@@ -55,7 +55,7 @@ class CanvasDraw extends Component {
 
     draw(e) {
         const ctx = this.ctx();
-    //    const ctxL = this.canvas().getContext("2d");
+        const ctxL = this.canvas().getContext("2d");
         let acc = this.props.acc;
         let hue = this.state.hue;
         let X = Math.abs(this.props.cord.x);
@@ -67,14 +67,8 @@ class CanvasDraw extends Component {
         let xCord = (Y - 7900)/(9500 - 7900) * (window.innerWidth);
         let yCord = (X - 12200)/(11400 - 12200) * (window.innerHeight);
         
-      //  ctxL.lineWidth = 100;
+        ctxL.lineWidth = 20;
         this.setColor(acc);
-            this.setState({
-                hue: hue,
-                lastX: xCord,
-                lastY: yCord
-            });
-            
         if (this.state.isDrawing) {
             if (this.state.color && this.state.customColor) {
                 ctx.strokeStyle = this.state.color;
@@ -93,6 +87,12 @@ class CanvasDraw extends Component {
             if (!this.state.customStroke) {
                 this.handleWidth(e);
             }
+
+            this.setState({
+                hue: hue,
+                lastX: xCord,
+                lastY: yCord
+            });
 
         }
     }
