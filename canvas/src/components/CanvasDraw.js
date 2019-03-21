@@ -55,22 +55,27 @@ class CanvasDraw extends Component {
 
     draw(e) {
         const ctx = this.ctx();
+    //    const ctxL = this.canvas().getContext("2d");
+     //   let acc = this.props.acc;
         let hue = this.state.hue;
-        let newHue = (Y - 1000)/(6500 - 1000) * (360);
         let X = Math.abs(this.props.cord.x);
         let Y = Math.abs(this.props.cord.y);
-        let yCord = (Y - 1000)/(6500 - 1000) * (window.innerHeight);
-        let xCord = (X - 15500)/(5500 - 15500) * (window.innerWidth);
+        //ROOM
+       // let yCord = (Y - 1000)/(6500 - 1000) * (window.innerHeight);
+       // let xCord = (X - 15500)/(5500 - 15500) * (window.innerWidth);
+        //Table
+        let xCord = (Y - 7900)/(9500 - 7900) * (window.innerWidth);
+        let yCord = (X - 12200)/(11400 - 12200) * (window.innerHeight);
         
-        consol.log();
+      //  ctxL.lineWidth = 100;
 
             this.setState({
-                hue: newHue,
+                hue: hue,
                 lastX: xCord,
                 lastY: yCord
             });
             
-        if (this.state.isDrawing && this.props.acc > 2000) {
+        if (this.state.isDrawing) {
             if (this.state.color && this.state.customColor) {
                 ctx.strokeStyle = this.state.color;
             } else {
@@ -151,7 +156,6 @@ class CanvasDraw extends Component {
     }
 
     render() {
-
 
         const canvasStyle = {
             border: "1px solid black"
