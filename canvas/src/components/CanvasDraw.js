@@ -68,12 +68,6 @@ class CanvasDraw extends Component {
         let yCord = (X - 12200)/(11400 - 12200) * (window.innerHeight);
         
       //  ctxL.lineWidth = 100;
-
-            this.setState({
-                hue: hue,
-                lastX: xCord,
-                lastY: yCord
-            });
             
         if (this.state.isDrawing) {
             if (this.state.color && this.state.customColor) {
@@ -93,6 +87,12 @@ class CanvasDraw extends Component {
             if (!this.state.customStroke) {
                 this.handleWidth(e);
             }
+            
+                        this.setState({
+                hue: hue,
+                lastX: xCord,
+                lastY: yCord
+            });
 
         }
     }
