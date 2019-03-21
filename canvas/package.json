@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "history": "^4.9.0",
     "mqtt": "^2.18.8",
     "mqtt-react": "0.0.3",
     "react": "^16.8.4",
     "react-canvas-draw": "^1.0.0",
     "react-dom": "^16.8.4",
+    "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8"
   },
   "scripts": {
