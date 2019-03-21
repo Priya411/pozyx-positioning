@@ -41,7 +41,7 @@ class App extends Component {
             //console.info(message.toString());
             if(update[0].success){
                 this.setState({coordinates: update[0].data.coordinates})
-                console.log(this.state.coordinates);
+              //  console.log(this.state.coordinates);
             }
             // To get a JavaScript object, use
         });
@@ -49,12 +49,11 @@ class App extends Component {
 
     render() {
         
-        let vw = window.innerWidth;
-        let vh = window.innerHeight;
+
         
         return (
                 <div className="App">
-                    <CanvasDraw canvasWidth={vw} canvasHeight={vh} coordinates={this.state.coordinates}/>
+                    <CanvasDraw coordinates={this.state.coordinates}/>
                 </div>
                 );
     }
