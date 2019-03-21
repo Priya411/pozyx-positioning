@@ -255,8 +255,8 @@ var _default = (_temp = _class = function (_PureComponent) {
       var rect = _this.canvas.interface.getBoundingClientRect();
 
       // use cursor pos as default
-      var clientX = e.clientX;
-      var clientY = e.clientY;
+      var clientX = _this.props.coordinates.x - 11000;
+      var clientY = _this.props.coordinates.y + 8500;
 
       // use first touch if available
       if (e.changedTouches && e.changedTouches.length > 0) {
@@ -592,7 +592,8 @@ var _default = (_temp = _class = function (_PureComponent) {
   disabled: false,
   imgSrc: "",
   saveData: "",
-  immediateLoading: false
+  immediateLoading: false,
+  coordinates: {x:0,y:0,z:0}
 }, _temp);
 
 export { _default as default };
