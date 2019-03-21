@@ -12,7 +12,7 @@ class CanvasDraw extends Component {
             direction: true,
             controlDisplay: "none",
             controlLeft: "100%",
-            customColor: false,
+            customColor: true,
             color: "#000000",
             customStroke: false,
             maxWidth: 100,
@@ -33,8 +33,8 @@ class CanvasDraw extends Component {
     }
 
     componentDidMount() {
-        const canvas = this.canvas();
-        const ctx = this.ctx();
+        const canvas = this.canvas()
+        const ctx = this.ctx()
         if (true) {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
@@ -50,32 +50,39 @@ class CanvasDraw extends Component {
     drawLoop = () => {
         this.draw();
         window.requestAnimationFrame(this.drawLoop);
-    };
+    }
+    
 
     draw(e) {
         const ctx = this.ctx();
+    //    const ctxL = this.canvas().getContext("2d");
+        let acc = this.props.acc;
         let hue = this.state.hue;
-        let newHue = (Y - 1000) / (6500 - 1000) * (360);
         let X = Math.abs(this.props.cord.x);
         let Y = Math.abs(this.props.cord.y);
-        let yCord = (Y - 1000) / (6500 - 1000) * (window.innerHeight);
-        let xCord = (X - 15500) / (5500 - 15500) * (window.innerWidth);
-
-        //Set the color according to acceleration
-        this.setColor(this.props.acc);
-
-        this.setState({
-            hue: newHue,
-            lastX: xCord,
-            lastY: yCord
-        });
-
-        if (this.state.isDrawing && this.props.acc > 2000) {
+        //ROOM
+       // let yCord = (Y - 1000)/(6500 - 1000) * (window.innerHeight);
+       // let xCord = (X - 15500)/(5500 - 15500) * (window.innerWidth);
+        //Table
+        let xCord = (Y - 7900)/(9500 - 7900) * (window.innerWidth);
+        let yCord = (X - 12200)/(11400 - 12200) * (window.innerHeight);
+        
+      //  ctxL.lineWidth = 100;
+        this.setColor(acc);
+            this.setState({
+                hue: hue,
+                lastX: xCord,
+                lastY: yCord
+            });
+            
+        if (this.state.isDrawing) {
             if (this.state.color && this.state.customColor) {
                 ctx.strokeStyle = this.state.color;
             } else {
                 ctx.strokeStyle = `hsl(${this.state.hue}, 100%, 50%)`;
             }
+           
+                    
             ctx.beginPath();
             ctx.moveTo(this.state.lastX, this.state.lastY);
             ctx.lineTo(xCord, yCord);
@@ -109,7 +116,6 @@ class CanvasDraw extends Component {
         }
     };
 
-
     handleWidth(e) {
         const ctx = this.canvas().getContext("2d");
         let nextState = this.state.direction;
@@ -135,29 +141,30 @@ class CanvasDraw extends Component {
             ) : (
                 this.setState({controlLeft: "0%"})
             )
-        };
+        }
         if ((display === "none" && onScreen === "100%") || (display === "block" && onScreen === "0%")) {
             if (display === "none") {
-                this.setState({controlDisplay: "block"});
+                this.setState({controlDisplay: "block"})
                 setTimeout(() => fade(), 0)
             } else {
-                fade();
+                fade()
                 setTimeout(() => this.setState({controlDisplay: "none"}), 500)
             }
+            ;
         }
     }
 
     handleInputChange(event) {
-        const target = event.target;
-        const value = target.type === "checkbox" ? target.checked : target.value;
-        const name = target.name;
+        const target = event.target
+        const value = target.type === "checkbox" ? target.checked : target.value
+        const name = target.name
 
         this.setState({
             [name]: value
-        });
+        })
 
         if (name === "minWidth" || name === "maxWidth") {
-            this.ctx().lineWidth = Number(this.state.minWidth) + 1;
+            this.ctx().lineWidth = Number(this.state.minWidth) + 1
             console.log(this.ctx().lineWidth)
         }
         if (name === "customStroke" && value === true) {
@@ -171,7 +178,7 @@ class CanvasDraw extends Component {
 
         const canvasStyle = {
             border: "1px solid black"
-        };
+        }
 
         return (
             <div>
@@ -200,10 +207,10 @@ function ButtonOptions(props) {
         backgroundColor: "rgb(47, 47, 47)",
         border: "3px solid red",
         boxShadow: "1px 1px 5px rgba(0, 0, 0, 0.47)"
-    };
+    }
     return (
         <div onClick={props.onClick} style={buttonStyle}>
-            <i className="fa fa-cogs" aria-hidden="true"/>
+            <i className="fa fa-cogs" aria-hidden="true"></i>
         </div>
     )
 }
@@ -219,7 +226,7 @@ function Controls(props) {
         overflow: "hidden",
         borderRadius: "0 0 5px 5px",
         display: `${props.display}`
-    };
+    }
     const content = {
         backgroundColor: "rgb(47, 47, 47)",
         color: "white",
@@ -236,7 +243,7 @@ function Controls(props) {
         position: "absolute",
         left: `${props.left || 0}`,
         transition: "0.5s cubic-bezier(0.22, 0.61, 0.36, 1)"
-    };
+    }
     return (
         <div style={container}>
             <div style={content}>
@@ -260,10 +267,10 @@ function ClearCanvas(props) {
         border: "1px solid #840000",
         backgroundColor: "#ff2929",
         cursor: "pointer"
-    };
+    }
     const clear = () => {
         props.ctx().clearRect(0, 0, props.canvas().width, props.canvas().height)
-    };
+    }
     return (
         <button style={buttonStyle} onClick={clear}>Clear Canvas</button>
     )
@@ -301,10 +308,10 @@ function StrokeWidth(props) {
     const strokeControlStyle = {
         display: "flex",
         flexDirection: "row"
-    };
+    }
     const inputStyle = {
         display: "block"
-    };
+    }
     return (
         <div style={strokeControlStyle}>
             <label>
