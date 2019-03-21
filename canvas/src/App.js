@@ -53,7 +53,7 @@ class App extends Component {
         
         return (
                 <div className="App">
-                    <CanvasDraw coordinates={this.state.coordinates}/>
+                    <CanvasDraw cord={this.state.coordinates}/>
                 </div>
                 );
     }

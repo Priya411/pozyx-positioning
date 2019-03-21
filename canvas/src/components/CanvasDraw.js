@@ -5,7 +5,6 @@ class CanvasDraw extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            coordinates: {x: 0, y: 0, z: 0},
             isDrawing: true,
             lastX: 0,
             lastY: 0,
@@ -54,7 +53,7 @@ class CanvasDraw extends Component {
             }
             ctx.beginPath();
             ctx.moveTo(this.state.lastX, this.state.lastY);
-            ctx.lineTo(e.nativeEvent.offsetX, e.nativeEvent.offsetY);
+            ctx.lineTo((this.props.cord.x) - 11200, (this.props.cord.y) + 9000);
             ctx.stroke();
             hue++
             if (hue >= 360) {
@@ -62,8 +61,8 @@ class CanvasDraw extends Component {
             }
             this.setState({
                 hue: hue,
-                lastX: e.nativeEvent.offsetX,
-                lastY: e.nativeEvent.offsetY
+                lastX: (this.props.cord.x) - 11200,
+                lastY: (this.props.cord.y) + 9000
             })
             if (!this.state.customStroke) {
                 this.handleWidth(e);
@@ -128,6 +127,8 @@ class CanvasDraw extends Component {
     }
 
     render() {
+        
+        console.log(this.state.lastX);
 
         const canvasStyle = {
             border: "1px solid black"
