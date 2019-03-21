@@ -12,9 +12,9 @@ class CanvasDraw extends Component {
             direction: true,
             controlDisplay: "none",
             controlLeft: "100%",
-            customColor: false,
+            customColor: true,
             color: "#000000",
-            customStroke: false,
+            customStroke: true,
             maxWidth: 100,
             minWidth: 5
         };
@@ -55,8 +55,8 @@ class CanvasDraw extends Component {
 
     draw(e) {
         const ctx = this.ctx();
-    //    const ctxL = this.canvas().getContext("2d");
-     //   let acc = this.props.acc;
+        const ctxL = this.canvas().getContext("2d");
+        let acc = this.props.acc;
         let hue = this.state.hue;
         let X = Math.abs(this.props.cord.x);
         let Y = Math.abs(this.props.cord.y);
@@ -67,8 +67,8 @@ class CanvasDraw extends Component {
         let xCord = (Y - 7900)/(9500 - 7900) * (window.innerWidth);
         let yCord = (X - 12200)/(11400 - 12200) * (window.innerHeight);
         
-      //  ctxL.lineWidth = 100;
-            
+        ctxL.lineWidth = 20;
+        this.setColor(acc);
         if (this.state.isDrawing) {
             if (this.state.color && this.state.customColor) {
                 ctx.strokeStyle = this.state.color;
@@ -87,8 +87,8 @@ class CanvasDraw extends Component {
             if (!this.state.customStroke) {
                 this.handleWidth(e);
             }
-            
-                        this.setState({
+
+            this.setState({
                 hue: hue,
                 lastX: xCord,
                 lastY: yCord
@@ -96,6 +96,25 @@ class CanvasDraw extends Component {
 
         }
     }
+
+    setColor = (acceleration) => {
+        if (acceleration < 1000) {
+            //Set color to green
+            this.setState({color: '#1BE600'});
+        } else if (acceleration < 1500) {
+            this.setState({color: '#BBFF00'});
+        } else if (acceleration < 2000) {
+            this.setState({color: '#F2DE00'});
+        } else if (acceleration < 2500) {
+            this.setState({color: '#EB9800'});
+        } else if (acceleration < 3000) {
+            this.setState({color: '#EB6200'});
+        } else if(acceleration < 4000){
+            this.setState({color: '#FF3300'});
+        } else {
+            this.setState({color: '#000000'});
+        }
+    };
 
     handleWidth(e) {
         const ctx = this.canvas().getContext("2d");

@@ -52,7 +52,7 @@ class App extends Component {
                     this.setState({accelereation: normlizedAcceleration});
                 //Set the state of acceleration
 
-              //  console.log(normlizedAcceleration);
+              //console.log(normlizedAcceleration);
 
             }
 
