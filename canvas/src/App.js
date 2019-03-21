@@ -9,7 +9,8 @@ class App extends Component {
         super(props);
         this.state = {
             coordinates: {},
-            accelereation: 0
+            accelereation: 0,
+            velocity: {}
         }
     }
 
@@ -43,18 +44,21 @@ class App extends Component {
 
             //console.info(message.toString());
             if (update[0].success && update[0] !== null) {
-                this.setState({coordinates: update[0].data.coordinates})
-                //  console.log(this.state.coordinates);
+                this.setState({
+                    coordinates: update[0].data.coordinates,
+                    velocity: update[0].data.velocity
+                });
+                //console.log(this.state.velocity);
                 //console.log(update[0].data.tagData.accelerometer[0]);
 
                 const normlizedAcceleration = this.normalize(update[0].data.tagData.accelerometer[0][0],
-                    update[0].data.tagData.accelerometer[0][1],
-                    update[0].data.tagData.accelerometer[0][2]);
-                    
-                    this.setState({accelereation: normlizedAcceleration});
+                        update[0].data.tagData.accelerometer[0][1],
+                        update[0].data.tagData.accelerometer[0][2]);
+
+                this.setState({accelereation: normlizedAcceleration});
                 //Set the state of acceleration
 
-              //console.log(normlizedAcceleration);
+                //console.log(normlizedAcceleration);
 
             }
 
@@ -66,15 +70,15 @@ class App extends Component {
     normalize = (x, y, z) => {
         const length = Math.sqrt(x * x + y * y + z * z);
         return Math.ceil(length);
-    };
-
-    render() {
+    }
+    ;
+            render() {
 
         return (
-            <div className="App">
-                <Jump cord={this.state.coordinates} acc={this.state.accelereation}/>
-            </div>
-        );
+                <div className="App">
+                    <Jump cord={this.state.coordinates} acc={this.state.accelereation} vel={this.state.velocity}/>
+                </div>
+                );
     }
 }
 

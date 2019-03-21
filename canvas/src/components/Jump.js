@@ -5,14 +5,21 @@ class Jump extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            acceleration: this.props.acc,
-            score: 0,
-            maxAcc: 0
+            vel: 0,
+            score: 0
         };
     }
+    
+    normalize = (props) => {
+        let x = props.vel.x;
+        let y = props.vel.y;
+        const length = Math.sqrt(x * x + y * y);
+        return Math.ceil(length);
+    }
+    ;
 
     componentDidMount() {
-        this.punchCheck();
+        this.jumpCheck();
     }
 
     reset = () => {
@@ -21,31 +28,30 @@ class Jump extends Component {
         });
     }
 
-    punchCheck = () => {
-        this.punch();
-        window.requestAnimationFrame(this.punchCheck);
+    jumpCheck = () => {
+        this.jump();
+        window.requestAnimationFrame(this.jumpCheck);
     }
 
-    punch() {
-        let acc = this.props.acc;
-        let power = (acc - 2000) / (3500 - 2000) * (500);
+    jump() {
+        let vel = this.normalize(this.props);
+        let power = (vel - 500) / (5000 - 500) * (1000);
 
         if (power < 0) {
             power = 0;
         }
 
-        if (acc > 2000) {
+        if (vel > 500) {
             if (power > this.state.score) {
                 var score = Math.ceil(power);
                 this.setState({score: score});
-            }
-            ;
+            };
         }
     }
 
     render() {
-        let acc = this.props.acc;
-        let power = (acc - 2000) / (5000 - 2000) * (200);
+        let vel = this.normalize(this.props);
+        let power = (vel - 500) / (5000 - 500) * (1000);
         if (power < 0) {
             power = 0;
         }
