@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import CanvasDraw from './components/CanvasDraw';
+import StickMan from './components/StickMan';
 import './App.css';
 
 class App extends Component {
@@ -40,7 +41,7 @@ class App extends Component {
             const update = JSON.parse(message.toString());
 
             //console.info(message.toString());
-            if (update[0].success) {
+            if (update[0].success && update[0] !== null) {
                 this.setState({coordinates: update[0].data.coordinates})
                 //  console.log(this.state.coordinates);
                 //console.log(update[0].data.tagData.accelerometer[0]);
@@ -70,7 +71,7 @@ class App extends Component {
 
         return (
             <div className="App">
-                <CanvasDraw cord={this.state.coordinates} acc={this.state.accelereation}/>
+                <StickMan cord={this.state.coordinates} acc={this.state.accelereation}/>
             </div>
         );
     }
