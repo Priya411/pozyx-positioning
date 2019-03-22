@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
-import CanvasDraw from './components/CanvasDraw';
-import StickMan from './components/StickMan';
-import Jump from './components/Jump';
+import Jump from '../components/Jump';
 import './App.css';
 
-class App extends Component {
+class JumpApp extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -52,8 +50,8 @@ class App extends Component {
                 //console.log(update[0].data.tagData.accelerometer[0]);
 
                 const normlizedAcceleration = this.normalize(update[0].data.tagData.accelerometer[0][0],
-                        update[0].data.tagData.accelerometer[0][1],
-                        update[0].data.tagData.accelerometer[0][2]);
+                    update[0].data.tagData.accelerometer[0][1],
+                    update[0].data.tagData.accelerometer[0][2]);
 
                 this.setState({accelereation: normlizedAcceleration});
                 //Set the state of acceleration
@@ -72,14 +70,15 @@ class App extends Component {
         return Math.ceil(length);
     }
     ;
-            render() {
+
+    render() {
 
         return (
-                <div className="App">
-                    <Jump cord={this.state.coordinates} acc={this.state.accelereation} vel={this.state.velocity}/>
-                </div>
-                );
+            <div className="App">
+                <Jump cord={this.state.coordinates} acc={this.state.accelereation} vel={this.state.velocity}/>
+            </div>
+        );
     }
 }
 
-export default App;
+export default JumpApp;

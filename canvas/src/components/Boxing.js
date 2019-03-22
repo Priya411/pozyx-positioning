@@ -1,6 +1,6 @@
 import React, {Component}
 from "react";
-class StickMan extends Component {
+class Boxing extends Component {
 
     constructor(props) {
         super(props);
@@ -66,4 +66,4 @@ class StickMan extends Component {
 
 }
 
-export default StickMan;
+export default Boxing;
