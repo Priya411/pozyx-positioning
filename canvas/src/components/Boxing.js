@@ -52,7 +52,7 @@ class Boxing extends Component {
 
         let style = {
             transform: 'rotate(' + power + 'deg)',
-            transition: '.5s'
+            transition: '.2s'
         };
 
         return (
