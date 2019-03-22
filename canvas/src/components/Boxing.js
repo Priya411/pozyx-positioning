@@ -1,5 +1,6 @@
 import React, {Component}
-from "react";
+    from "react";
+
 class Boxing extends Component {
 
     constructor(props) {
@@ -12,19 +13,19 @@ class Boxing extends Component {
     }
 
     componentDidMount() {
-        this.punchCheck();
+        this.onBunch();
     }
 
     reset = () => {
         this.setState({
             score: 0
         });
-    }
+    };
 
-    punchCheck = () => {
+    onBunch = () => {
         this.punch();
-        window.requestAnimationFrame(this.punchCheck);
-    }
+        window.requestAnimationFrame(this.onBunch);
+    };
 
     punch() {
         let acc = this.props.acc;
@@ -34,12 +35,11 @@ class Boxing extends Component {
             power = 0;
         }
 
-        if (acc > 2000) {
+        if (acc > 1500) {
             if (power > this.state.score) {
                 var score = Math.ceil(power);
                 this.setState({score: score});
             }
-            ;
         }
     }
 
@@ -50,18 +50,19 @@ class Boxing extends Component {
             power = 0;
         }
 
-        var style = {
-            transform: 'rotate(' + power + 'deg)'
+        let style = {
+            transform: 'rotate(' + power + 'deg)',
+            transition: '.5s'
         };
 
         return (
-                <div>
-                    <button onClick={this.reset}>Reset</button>
-                    <h1>{this.state.score}</h1>
-                    <br/>
-                    <img src={require('../img/bag.jpg')} style={style}/>
-                </div>
-                );
+            <div>
+                <button onClick={this.reset}>Reset</button>
+                <h1>{this.state.score}</h1>
+                <br/>
+                <img src={require('../img/bag.jpg')} style={style}/>
+            </div>
+        );
     }
 
 }
